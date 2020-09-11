@@ -1,0 +1,191 @@
+<html>
+<head>
+<script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-firestore.js"></script>
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyC71cPCsorx1OeKH64MIF2oNtDasWa7sFg",
+    authDomain: "rims-48bfa.firebaseapp.com",
+    databaseURL: "https://rims-48bfa.firebaseio.com",
+    projectId: "rims-48bfa",
+    storageBucket: "rims-48bfa.appspot.com",
+    messagingSenderId: "411276583181",
+    appId: "1:411276583181:web:5655e2c47f540685b9d044",
+    measurementId: "G-F74E82TRBZ"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  
+  console.log(firebase)
+  
+  var db = firebase.firestore();
+  
+  db.collection("users").doc("doct").get().then((data)=>{
+  
+  
+
+   console.log(data.data())
+  
+
+  
+  })
+  
+  
+  
+  function _(id){
+  return document.getElementById(id)
+  }
+  
+  window.onload=()=>{
+  
+  setTimeout(()=>{
+  
+ var text = window.location.href;
+ var edr = text.split("#");
+ 
+ for(x in edr){
+ if(edr[x].startsWith("name")){
+ 
+ var ty = edr[x].split("=");
+ _("docname").innerHTML = ty[1]
+ 
+ }else{
+ 
+ 
+ }
+ 
+ 
+ }
+ 
+  
+document.getElementById("modal").classList.add("active")
+  
+  },2000)
+  
+  
+  }
+  
+</script>
+
+<style>
+
+@font-face {
+  font-family: segoe;
+  src: url(SegoeUI.woff);
+  font-weight:600;
+}
+
+*{
+font-family:segoe
+}
+
+.modal.modal-sm .modal-container {
+    max-width: 350px;
+  
+}
+
+.allels{
+padding:10px;
+margin:10px;
+cursor:pointer;
+}
+
+
+.allels:hover{
+color:blue
+}
+
+.selected{
+background:#2d3e50;
+border-radius:3px;
+color:white
+}
+
+.selected:hover{
+color:white
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div style='height:auto;width:100%;margin-top:-10px' class='menu'>
+
+<div class='col-12 clearfix' >
+<img style='margin:10px' class='float-left' src='logo.png'/>
+
+<div class='float-right hide-md' style='margin-top:15px'>
+
+<span class='selected allels'>Home</span>
+<span class='allels'>About Us</span>
+<span class=' allels'>Health4all</span>
+<span class=' allels'>Notices</span>
+<span class=' allels'>Contact</span>
+
+</div>
+
+
+<img class='show-md float-right ' style='margin:15px ;height:25px;cursor:pointer' src='https://img.icons8.com/android/50/menu.png'/>
+
+
+</div>
+
+</div>
+
+<div class="modal active modal-sm"  id="modal">
+  <a  class="modal-overlay" style='background:rgba(0,0,0,0.7)' aria-label="Close"></a>
+  <div  class="modal-container" style='padding:0rem'>
+    <div style='background:#673bb7;width:100%' class="modal-header">
+    
+      <p style='color:white;margin:0px'>Please Support Us</p>
+    </div>
+	<div style='display:'  id='pcstep1'>
+    <div style='max-height:350px' class="modal-body">
+      <div class="content">
+<img src='covid-19.jpg' style='height:70px;width:auto;'/>
+	<p class='h6'>Hello <span id='docname'></span>,</p>  
+	<p>We have recovered 20000 patients from corona and still 25000 patients are getting treatment .We need your support to encourage all of our doctors.We request you to support us.</p>
+	  
+	</div>
+    </div>
+    <div class="modal-footer">
+      <button onclick='topc2()' class='btn btn-primary'>Support Now</button>
+    </div>
+    </div>
+	
+  </div>
+</div>
+
+
+<div style='height:auto;min-height:100%;width:100%;background-image:url("bgimg.jpg");background-repeat: no-repeat;background-attachment: fixed; background-size: cover;'>
+
+<div style=';color:white;padding-top:200px'>
+<div style='background:rgba(0,0,0,0.6);padding:10px'>
+
+<h3>RIMS Kadapa</h3><p>Treating corona people most efficiently with improved technology.</p>
+</div>
+</div>
+
+</div>
+
+
+</body>
+
+
+
+</html>
