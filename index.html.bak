@@ -161,7 +161,7 @@ color:white
 	<p class='h6'>Hello <span id='docname'></span>,</p>  
 	<p>We have recovered <span style='font-family:sans-serif;font-weight:600'>20000</span> patients from corona and still <span style='font-family:sans-serif;font-weight:600'>25000</span> patients are getting treatment .<span style='font-family:sans-serif;font-weight:600'>We need your support to encourage all of our doctors</span>.We request you to support us.</p>
 	  <p style='margin:0px'>From,</p>
-	  <p>RIMS Kadapa</p>
+	  <p style='margin:0px'>RIMS Kadapa</p>
 	</div>
     </div>
     <div class="modal-footer">
